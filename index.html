@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Happy 17th Birthday</title>
 
 <style>
@@ -15,13 +16,13 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-text-align:center;
 overflow:hidden;
 color:white;
+text-align:center;
 
 background:linear-gradient(135deg,#4aa3ff,#8ad0ff,#ff8fc7,#ffd0ec);
 background-size:300% 300%;
-animation:bgMove 10s ease infinite;
+animation:bgMove 12s ease infinite;
 }
 
 @keyframes bgMove{
@@ -30,19 +31,29 @@ animation:bgMove 10s ease infinite;
 100%{background-position:0% 50%;}
 }
 
+/* MAIN CARD */
+
 .container{
 width:90%;
 max-width:420px;
 padding:35px;
-border-radius:24px;
+border-radius:22px;
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(14px);
 box-shadow:0 15px 40px rgba(0,0,0,0.25);
+
+transition:0.6s;
+}
+
+.container.hide{
+opacity:0;
+transform:scale(.9);
+pointer-events:none;
 }
 
 h1{
-font-size:32px;
-margin-bottom:5px;
+font-size:30px;
+margin-bottom:8px;
 }
 
 .age{
@@ -56,18 +67,25 @@ animation:pulse 2.5s infinite;
 
 @keyframes pulse{
 0%{transform:scale(1)}
-50%{transform:scale(1.1)}
+50%{transform:scale(1.08)}
 100%{transform:scale(1)}
 }
 
 #typing{
 min-height:28px;
-margin-top:10px;
+margin-top:12px;
 font-size:18px;
+opacity:0;
+animation:fadeText 1s forwards;
+animation-delay:1s;
+}
+
+@keyframes fadeText{
+to{opacity:1;}
 }
 
 button{
-margin-top:25px;
+margin-top:28px;
 padding:12px 28px;
 border:none;
 border-radius:30px;
@@ -75,7 +93,7 @@ font-size:16px;
 background:white;
 color:#3a6cff;
 cursor:pointer;
-transition:0.25s;
+transition:.25s;
 box-shadow:0 6px 18px rgba(0,0,0,0.2);
 }
 
@@ -91,49 +109,50 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.6);
-display:none;
+background:#000000cc;
+display:flex;
 justify-content:center;
 align-items:center;
-z-index:1000;
-padding:20px;
+
+opacity:0;
+pointer-events:none;
+transition:0.6s;
 }
 
-.modal-content{
+.modal.show{
+opacity:1;
+pointer-events:auto;
+}
+
+.modal-card{
+
 background:linear-gradient(135deg,#4aa3ff,#ff8fc7);
 padding:30px;
 border-radius:20px;
 max-width:420px;
-width:100%;
-color:white;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
-animation:pop 0.6s ease;
+width:90%;
+
+box-shadow:0 15px 40px rgba(0,0,0,0.4);
+
+transform:scale(.7);
+opacity:0;
+
+animation:popUp .8s forwards;
 }
 
-@keyframes pop{
-0%{transform:scale(0.6);opacity:0;}
-100%{transform:scale(1);opacity:1;}
+@keyframes popUp{
+to{
+transform:scale(1);
+opacity:1;
+}
 }
 
-.modal img{
-width:180px;
-max-width:70%;
+.modal-card img{
+width:190px;
+max-width:80%;
 border-radius:14px;
-margin-top:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.4);
-}
-
-/* floating icons */
-
-.float{
-position:absolute;
-animation:floatUp linear infinite;
-opacity:0.9;
-}
-
-@keyframes floatUp{
-0%{transform:translateY(0) scale(0.8);}
-100%{transform:translateY(-110vh) scale(1.3);}
+margin-top:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
 /* confetti */
@@ -150,21 +169,25 @@ animation:fall 4s linear forwards;
 100%{transform:translateY(110vh) rotate(720deg);}
 }
 
+/* floating cute icons */
+
+.float{
+position:absolute;
+animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0);}
+100%{transform:translateY(-110vh);}
+}
+
 /* responsive */
 
 @media (max-width:480px){
 
-.age{
-font-size:65px;
-}
-
-h1{
-font-size:26px;
-}
-
-#typing{
-font-size:16px;
-}
+.age{font-size:60px;}
+h1{font-size:24px;}
+#typing{font-size:16px;}
 
 }
 
@@ -173,31 +196,33 @@ font-size:16px;
 
 <body>
 
-<div class="container">
+<div class="container" id="mainCard">
 
 <h1>Happy Birthday</h1>
 <div class="age">17</div>
 
 <p id="typing"></p>
 
-<button onclick="showSurprise()">Buka Kejutan 🎁</button>
+<button onclick="openSurprise()">Buka Kejutan 🎁</button>
 
 </div>
 
-<!-- POPUP -->
 
 <div class="modal" id="modal">
-<div class="modal-content">
+
+<div class="modal-card">
 
 <h2>Surprise 🎉</h2>
 
 <p>
-Selamat ulang tahun yang ke-17 🎂<br><br>
-Semoga di usia baru ini hidupmu dipenuhi
-kebahagiaan, mimpi yang tercapai,
-dan banyak hari indah yang menunggumu.<br><br>
-Terima kasih sudah menjadi seseorang
-yang sangat berarti. 💙💗
+Selamat ulang tahun yang ke-17 🎂 <br><br>
+Semoga semua mimpi indahmu
+pelan-pelan menjadi nyata,
+dan setiap harimu selalu dipenuhi
+kebahagiaan yang sederhana tapi berarti. <br><br>
+
+Terima kasih sudah menjadi
+orang yang sangat spesial. 💙💗
 </p>
 
 <img src="foto.jpg">
@@ -209,58 +234,47 @@ yang sangat berarti. 💙💗
 </div>
 </div>
 
+
 <script>
 
-/* typing text */
+/* TYPEWRITER TEXT */
 
 const text="Aku punya kejutan kecil untukmu...";
 let i=0;
 
 function typing(){
+
 if(i<text.length){
-document.getElementById("typing").innerHTML += text.charAt(i);
+document.getElementById("typing").innerHTML+=text.charAt(i);
 i++;
-setTimeout(typing,60);
+setTimeout(typing,55);
 }
+
 }
 
-typing();
+setTimeout(typing,1000);
 
-/* popup surprise */
 
-function showSurprise(){
+/* OPEN SURPRISE */
 
-document.getElementById("modal").style.display="flex";
+function openSurprise(){
+
+document.getElementById("mainCard").classList.add("hide");
+
+setTimeout(()=>{
+
+document.getElementById("modal").classList.add("show");
 
 document.getElementById("music").play();
 
 createConfetti();
 
-}
-
-/* floating icons */
-
-function createFloat(){
-
-const el=document.createElement("div");
-el.className="float";
-
-const icons=["💗","💙","✨","🌸","💖"];
-el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-
-el.style.left=Math.random()*100+"vw";
-el.style.fontSize=(Math.random()*22+14)+"px";
-el.style.animationDuration=(Math.random()*4+5)+"s";
-
-document.body.appendChild(el);
-
-setTimeout(()=>{el.remove()},9000);
+},500);
 
 }
 
-setInterval(createFloat,500);
 
-/* confetti */
+/* CONFETTI */
 
 function createConfetti(){
 
@@ -281,6 +295,29 @@ setTimeout(()=>{c.remove()},4000);
 }
 
 }
+
+
+/* FLOATING HEARTS */
+
+function floatHearts(){
+
+const el=document.createElement("div");
+el.className="float";
+
+const icons=["💗","💙","✨","🌸"];
+el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+
+el.style.left=Math.random()*100+"vw";
+el.style.fontSize=(Math.random()*22+16)+"px";
+el.style.animationDuration=(Math.random()*5+6)+"s";
+
+document.body.appendChild(el);
+
+setTimeout(()=>{el.remove()},9000);
+
+}
+
+setInterval(floatHearts,600);
 
 </script>
 
