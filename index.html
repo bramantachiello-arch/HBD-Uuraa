@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Happy 17th Birthday</title>
+<title>Birthday Surprise</title>
 
 <style>
 
@@ -13,12 +14,12 @@ body{
 margin:0;
 font-family:'Segoe UI',sans-serif;
 height:100vh;
+overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
-overflow:hidden;
-color:white;
 text-align:center;
+color:white;
 
 background:linear-gradient(135deg,#4aa3ff,#8ad0ff,#ff8fc7,#ffd0ec);
 background-size:300% 300%;
@@ -31,163 +32,193 @@ animation:bgMove 12s ease infinite;
 100%{background-position:0% 50%;}
 }
 
-/* MAIN CARD */
+/* INTRO */
 
-.container{
+#intro{
+
 width:90%;
 max-width:420px;
 padding:35px;
 border-radius:22px;
+
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(14px);
+
 box-shadow:0 15px 40px rgba(0,0,0,0.25);
 
-transition:0.6s;
+animation:introAppear 1s ease;
+
 }
 
-.container.hide{
-opacity:0;
-transform:scale(.9);
-pointer-events:none;
+@keyframes introAppear{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
 }
 
 h1{
+margin:0;
 font-size:30px;
-margin-bottom:8px;
-}
-
-.age{
-font-size:80px;
-font-weight:bold;
-background:linear-gradient(45deg,#ffffff,#ffd1ec);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:pulse 2.5s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.08)}
-100%{transform:scale(1)}
 }
 
 #typing{
-min-height:28px;
-margin-top:12px;
+margin-top:15px;
 font-size:18px;
-opacity:0;
-animation:fadeText 1s forwards;
-animation-delay:1s;
-}
-
-@keyframes fadeText{
-to{opacity:1;}
+min-height:25px;
 }
 
 button{
-margin-top:28px;
+
+margin-top:25px;
+
 padding:12px 28px;
+
 border:none;
 border-radius:30px;
-font-size:16px;
+
 background:white;
 color:#3a6cff;
+
+font-size:16px;
 cursor:pointer;
-transition:.25s;
+
 box-shadow:0 6px 18px rgba(0,0,0,0.2);
+
+transition:.2s;
+
 }
 
 button:hover{
 transform:scale(1.08);
 }
 
-/* POPUP */
 
-.modal{
+/* SURPRISE SCREEN */
+
+#surprise{
+
 position:fixed;
+
 top:0;
 left:0;
+
 width:100%;
 height:100%;
-background:#000000cc;
+
 display:flex;
+flex-direction:column;
+
 justify-content:center;
 align-items:center;
 
+background:linear-gradient(160deg,#1b2cff,#ff5ea9);
+
 opacity:0;
 pointer-events:none;
-transition:0.6s;
+
+transition:0.8s;
+
 }
 
-.modal.show{
+#surprise.show{
+
 opacity:1;
 pointer-events:auto;
+
 }
 
-.modal-card{
 
-background:linear-gradient(135deg,#4aa3ff,#ff8fc7);
-padding:30px;
-border-radius:20px;
+/* AGE ANIMATION */
+
+.age{
+
+font-size:120px;
+font-weight:bold;
+
+background:linear-gradient(45deg,#ffffff,#ffd6f0);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+animation:agePop 1.2s ease;
+
+}
+
+@keyframes agePop{
+
+0%{transform:scale(0.3); opacity:0;}
+60%{transform:scale(1.2);}
+100%{transform:scale(1);}
+
+}
+
+.message{
+
 max-width:420px;
-width:90%;
+margin-top:20px;
+font-size:18px;
+line-height:1.6;
+padding:0 20px;
 
-box-shadow:0 15px 40px rgba(0,0,0,0.4);
+animation:textFade 2s ease;
 
-transform:scale(.7);
-opacity:0;
-
-animation:popUp .8s forwards;
 }
 
-@keyframes popUp{
-to{
-transform:scale(1);
-opacity:1;
-}
+@keyframes textFade{
+from{opacity:0;}
+to{opacity:1;}
 }
 
-.modal-card img{
-width:190px;
+.photo img{
+
+margin-top:20px;
+width:200px;
 max-width:80%;
-border-radius:14px;
-margin-top:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
+border-radius:16px;
+
+box-shadow:0 12px 30px rgba(0,0,0,0.4);
+
 }
 
-/* confetti */
+
+/* CONFETTI */
 
 .confetti{
+
 position:absolute;
-width:8px;
-height:8px;
-animation:fall 4s linear forwards;
+width:10px;
+height:10px;
+
+animation:confettiFall linear forwards;
+
 }
 
-@keyframes fall{
-0%{transform:translateY(-10vh) rotate(0deg);}
-100%{transform:translateY(110vh) rotate(720deg);}
+@keyframes confettiFall{
+
+0%{
+transform:translateY(-10vh) rotate(0deg);
 }
 
-/* floating cute icons */
-
-.float{
-position:absolute;
-animation:floatUp linear infinite;
+100%{
+transform:translateY(110vh) rotate(720deg);
 }
 
-@keyframes floatUp{
-0%{transform:translateY(0);}
-100%{transform:translateY(-110vh);}
 }
 
-/* responsive */
 
-@media (max-width:480px){
+/* RESPONSIVE */
 
-.age{font-size:60px;}
-h1{font-size:24px;}
-#typing{font-size:16px;}
+@media(max-width:480px){
+
+.age{
+font-size:80px;
+}
+
+h1{
+font-size:24px;
+}
+
+.message{
+font-size:16px;
+}
 
 }
 
@@ -196,128 +227,110 @@ h1{font-size:24px;}
 
 <body>
 
-<div class="container" id="mainCard">
+<div id="intro">
 
 <h1>Happy Birthday</h1>
-<div class="age">17</div>
 
 <p id="typing"></p>
 
-<button onclick="openSurprise()">Buka Kejutan 🎁</button>
+<button onclick="startSurprise()">Buka Kejutan 🎁</button>
 
 </div>
 
 
-<div class="modal" id="modal">
+<div id="surprise">
 
-<div class="modal-card">
+<div class="age">17</div>
 
-<h2>Surprise 🎉</h2>
+<div class="message">
 
-<p>
-Selamat ulang tahun yang ke-17 🎂 <br><br>
-Semoga semua mimpi indahmu
-pelan-pelan menjadi nyata,
-dan setiap harimu selalu dipenuhi
-kebahagiaan yang sederhana tapi berarti. <br><br>
+Selamat ulang tahun yang ke-17 🎂  
+Semoga semua mimpi indahmu perlahan menjadi nyata,  
+dan setiap hari di hidupmu dipenuhi kebahagiaan.  
 
-Terima kasih sudah menjadi
-orang yang sangat spesial. 💙💗
-</p>
+Terima kasih sudah menjadi seseorang yang sangat berarti 💙💗
+
+</div>
+
+<div class="photo">
 
 <img src="foto.jpg">
+
+</div>
 
 <audio id="music">
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 </div>
-</div>
 
 
 <script>
 
-/* TYPEWRITER TEXT */
+/* TYPEWRITER */
 
-const text="Aku punya kejutan kecil untukmu...";
+const text="Aku punya sesuatu untukmu...";
 let i=0;
 
 function typing(){
 
 if(i<text.length){
+
 document.getElementById("typing").innerHTML+=text.charAt(i);
+
 i++;
+
 setTimeout(typing,55);
-}
 
 }
 
-setTimeout(typing,1000);
+}
+
+typing();
 
 
-/* OPEN SURPRISE */
+/* START SURPRISE */
 
-function openSurprise(){
+function startSurprise(){
 
-document.getElementById("mainCard").classList.add("hide");
+document.getElementById("intro").remove();
 
-setTimeout(()=>{
+const surprise=document.getElementById("surprise");
 
-document.getElementById("modal").classList.add("show");
+surprise.classList.add("show");
 
 document.getElementById("music").play();
 
-createConfetti();
-
-},500);
+launchConfetti();
 
 }
 
 
-/* CONFETTI */
+/* CONFETTI RANDOM */
 
-function createConfetti(){
+function launchConfetti(){
 
-for(let i=0;i<120;i++){
+for(let i=0;i<150;i++){
 
 const c=document.createElement("div");
+
 c.className="confetti";
 
 const colors=["#ff8fc7","#ffd0ec","#4aa3ff","#8ad0ff","#ffffff"];
+
 c.style.background=colors[Math.floor(Math.random()*colors.length)];
 
 c.style.left=Math.random()*100+"vw";
 
+c.style.animationDuration=(Math.random()*3+3)+"s";
+
 document.body.appendChild(c);
 
-setTimeout(()=>{c.remove()},4000);
+setTimeout(()=>{c.remove()},6000);
 
 }
 
 }
-
-
-/* FLOATING HEARTS */
-
-function floatHearts(){
-
-const el=document.createElement("div");
-el.className="float";
-
-const icons=["💗","💙","✨","🌸"];
-el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-
-el.style.left=Math.random()*100+"vw";
-el.style.fontSize=(Math.random()*22+16)+"px";
-el.style.animationDuration=(Math.random()*5+6)+"s";
-
-document.body.appendChild(el);
-
-setTimeout(()=>{el.remove()},9000);
-
-}
-
-setInterval(floatHearts,600);
 
 </script>
 
