@@ -31,44 +31,45 @@ width:100%;
 height:100%;
 
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
 
 background:linear-gradient(135deg,#4aa3ff,#8ad0ff,#ff8fc7);
-
-animation:bgMove 12s infinite alternate;
+background-size:200% 200%;
+animation:bgFlow 10s ease infinite;
 }
 
-@keyframes bgMove{
-0%{filter:hue-rotate(0deg);}
-100%{filter:hue-rotate(30deg);}
+@keyframes bgFlow{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
-.menu-box{
+.menu{
 
 background:rgba(255,255,255,0.15);
-padding:40px;
-border-radius:20px;
-backdrop-filter:blur(10px);
-box-shadow:0 15px 40px rgba(0,0,0,0.3);
+padding:45px;
+border-radius:22px;
+backdrop-filter:blur(12px);
+box-shadow:0 20px 50px rgba(0,0,0,0.25);
 
 }
 
-h1{
+.menu h1{
 margin:0;
 font-size:32px;
 }
 
-p{
+.menu p{
+opacity:0.85;
 margin-top:10px;
-opacity:0.9;
 }
 
 button{
 
 margin-top:25px;
-padding:14px 32px;
+
+padding:14px 34px;
 
 border:none;
 border-radius:30px;
@@ -80,14 +81,14 @@ color:#3a6cff;
 
 cursor:pointer;
 
-transition:0.2s;
+transition:0.25s;
 
-box-shadow:0 8px 20px rgba(0,0,0,0.3);
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
 
 }
 
 button:hover{
-transform:scale(1.08);
+transform:scale(1.07);
 }
 
 /* SURPRISE SCREEN */
@@ -103,7 +104,7 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 
-background:linear-gradient(160deg,#1827ff,#ff5ea9);
+background:linear-gradient(160deg,#1a27ff,#ff5ea9);
 
 opacity:0;
 pointer-events:none;
@@ -117,43 +118,38 @@ opacity:1;
 pointer-events:auto;
 }
 
-/* LEVEL UP */
+/* LEVEL TEXT */
 
 .level{
 
-font-size:22px;
-letter-spacing:3px;
+letter-spacing:4px;
+font-size:18px;
 opacity:0.8;
 
 }
 
+/* AGE */
+
 .age{
 
 font-size:120px;
-font-weight:bold;
+font-weight:700;
 
 background:linear-gradient(45deg,#fff,#ffd6f0);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 
-animation:levelPop 1.2s ease;
+text-shadow:0 0 20px rgba(255,255,255,0.5);
+
+animation:agePop 1.2s ease;
 
 }
 
-@keyframes levelPop{
+@keyframes agePop{
 
-0%{
-transform:scale(0.2);
-opacity:0;
-}
-
-60%{
-transform:scale(1.3);
-}
-
-100%{
-transform:scale(1);
-}
+0%{transform:scale(0.3);opacity:0;}
+60%{transform:scale(1.25);}
+100%{transform:scale(1);}
 
 }
 
@@ -161,10 +157,11 @@ transform:scale(1);
 
 .message{
 
-max-width:420px;
-padding:20px;
-
+max-width:380px;
+margin-top:15px;
 line-height:1.6;
+font-size:17px;
+opacity:0.95;
 
 animation:fadeText 2s;
 
@@ -175,43 +172,42 @@ from{opacity:0}
 to{opacity:1}
 }
 
-/* PHOTO POLAROID */
+/* PHOTO */
 
 .photo{
 
-margin-top:20px;
+margin-top:18px;
 
-transform:rotate(-8deg) scale(0);
+transform:translateY(-200px) rotate(-8deg) scale(0.6);
+opacity:0;
 
-animation:photoReveal 1.2s forwards;
-animation-delay:0.8s;
+animation:photoDrop 1.2s forwards;
+animation-delay:.7s;
 
 }
 
 .photo img{
 
-width:210px;
-max-width:80%;
-
+width:160px;
 border-radius:14px;
 
-box-shadow:0 20px 40px rgba(0,0,0,0.45);
+box-shadow:0 18px 35px rgba(0,0,0,0.45);
 
 }
 
-@keyframes photoReveal{
+@keyframes photoDrop{
 
 0%{
-transform:translateY(-200px) rotate(-20deg) scale(0);
+transform:translateY(-220px) rotate(-20deg) scale(.5);
 opacity:0;
 }
 
 70%{
-transform:translateY(20px) rotate(4deg) scale(1.1);
+transform:translateY(10px) rotate(5deg) scale(1.05);
 }
 
 100%{
-transform:translateY(0) rotate(-5deg) scale(1);
+transform:translateY(0) rotate(-6deg) scale(1);
 opacity:1;
 }
 
@@ -222,7 +218,6 @@ opacity:1;
 .confetti{
 
 position:absolute;
-
 width:10px;
 height:10px;
 
@@ -246,13 +241,11 @@ transform:translateY(110vh) rotate(720deg);
 
 @media(max-width:480px){
 
-.age{
-font-size:80px;
-}
+.age{font-size:80px;}
 
-h1{
-font-size:24px;
-}
+.menu{padding:30px;}
+
+.photo img{width:140px;}
 
 }
 
@@ -263,13 +256,13 @@ font-size:24px;
 
 <div id="intro">
 
-<div class="menu-box">
+<div class="menu">
 
 <h1>Birthday Surprise</h1>
 
-<p>Press the button to unlock something ✨</p>
+<p>Something small waiting for you ✨</p>
 
-<button onclick="startSurprise()">Open Surprise 🎁</button>
+<button onclick="startSurprise()">Open Surprise</button>
 
 </div>
 
@@ -285,19 +278,14 @@ font-size:24px;
 <div class="message">
 
 Selamat ulang tahun yang ke-17 🎂  
-Semoga semua mimpi indahmu perlahan menjadi nyata,  
-dan setiap hari di hidupmu selalu dipenuhi kebahagiaan.
+Semoga setiap langkahmu membawa cerita baru,  
+dan semua hal baik selalu menemukan jalan menuju hidupmu.
 
 </div>
 
 <div class="photo">
-
-<img src="uuraa.jpg" alt="foto">
+<img src="uuraa.jpg">
 </div>
-
-<audio id="music">
-<source src="music.mp3" type="audio/mpeg">
-</audio>
 
 </div>
 
@@ -318,47 +306,37 @@ const surprise=document.getElementById("surprise");
 
 surprise.classList.add("show");
 
-document.getElementById("music").play();
-
 launchConfetti();
 
-},600);
+},500);
 
 }
 
-
-/* BUTTON CONFETTI EXPLOSION */
+/* CONFETTI EXPLOSION */
 
 function explodeConfetti(){
 
-for(let i=0;i<60;i++){
+for(let i=0;i<70;i++){
 
-const c=document.createElement("div");
-
-c.className="confetti";
-
-const colors=["#ff8fc7","#ffd0ec","#4aa3ff","#8ad0ff","#ffffff"];
-
-c.style.background=colors[Math.floor(Math.random()*colors.length)];
-
-c.style.left=Math.random()*100+"vw";
-
-c.style.animationDuration=(Math.random()*2+2)+"s";
-
-document.body.appendChild(c);
-
-setTimeout(()=>{c.remove()},3000);
+createConfetti();
 
 }
 
 }
-
 
 /* CONTINUOUS CONFETTI */
 
 function launchConfetti(){
 
 setInterval(()=>{
+
+createConfetti();
+
+},200);
+
+}
+
+function createConfetti(){
 
 const c=document.createElement("div");
 
@@ -375,8 +353,6 @@ c.style.animationDuration=(Math.random()*3+3)+"s";
 document.body.appendChild(c);
 
 setTimeout(()=>{c.remove()},6000);
-
-},200);
 
 }
 
