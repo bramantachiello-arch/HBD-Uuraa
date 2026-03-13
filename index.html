@@ -3,14 +3,15 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy 17th Birthday</title>
 
 <style>
 
 body{
 margin:0;
-height:100vh;
 font-family:'Segoe UI',sans-serif;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -29,44 +30,23 @@ animation:bgMove 10s ease infinite;
 100%{background-position:0% 50%;}
 }
 
-/* opening screen */
-
-.loader{
-position:absolute;
-font-size:22px;
-animation:fadeOut 3s forwards;
-}
-
-@keyframes fadeOut{
-0%{opacity:1}
-80%{opacity:1}
-100%{opacity:0;visibility:hidden}
-}
-
-/* main card */
-
 .container{
-width:420px;
-padding:45px;
+width:90%;
+max-width:420px;
+padding:35px;
 border-radius:24px;
 background:rgba(255,255,255,0.15);
 backdrop-filter:blur(14px);
 box-shadow:0 15px 40px rgba(0,0,0,0.25);
-animation:fadeIn 3s ease;
-}
-
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(20px)}
-to{opacity:1; transform:translateY(0)}
 }
 
 h1{
-font-size:34px;
+font-size:32px;
 margin-bottom:5px;
 }
 
 .age{
-font-size:90px;
+font-size:80px;
 font-weight:bold;
 background:linear-gradient(45deg,#ffffff,#ffd1ec);
 -webkit-background-clip:text;
@@ -100,34 +80,50 @@ box-shadow:0 6px 18px rgba(0,0,0,0.2);
 }
 
 button:hover{
-transform:scale(1.1);
+transform:scale(1.08);
 }
 
-.message{
+/* POPUP */
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
 display:none;
-margin-top:22px;
-line-height:1.7;
-font-size:17px;
+justify-content:center;
+align-items:center;
+z-index:1000;
+padding:20px;
 }
 
-.photo{
-display:none;
-margin-top:20px;
-}
-
-.photo img{
-width:220px;
-border-radius:16px;
+.modal-content{
+background:linear-gradient(135deg,#4aa3ff,#ff8fc7);
+padding:30px;
+border-radius:20px;
+max-width:420px;
+width:100%;
+color:white;
 box-shadow:0 10px 30px rgba(0,0,0,0.4);
-animation:photoPop 1s ease;
+animation:pop 0.6s ease;
 }
 
-@keyframes photoPop{
-0%{transform:scale(0.5);opacity:0;}
+@keyframes pop{
+0%{transform:scale(0.6);opacity:0;}
 100%{transform:scale(1);opacity:1;}
 }
 
-/* floating cute elements */
+.modal img{
+width:180px;
+max-width:70%;
+border-radius:14px;
+margin-top:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* floating icons */
 
 .float{
 position:absolute;
@@ -154,42 +150,63 @@ animation:fall 4s linear forwards;
 100%{transform:translateY(110vh) rotate(720deg);}
 }
 
+/* responsive */
+
+@media (max-width:480px){
+
+.age{
+font-size:65px;
+}
+
+h1{
+font-size:26px;
+}
+
+#typing{
+font-size:16px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="loader">
-✨ Preparing your surprise... ✨
-</div>
-
 <div class="container">
 
 <h1>Happy Birthday</h1>
-
 <div class="age">17</div>
 
 <p id="typing"></p>
 
 <button onclick="showSurprise()">Buka Kejutan 🎁</button>
 
-<div class="message" id="message">
+</div>
+
+<!-- POPUP -->
+
+<div class="modal" id="modal">
+<div class="modal-content">
+
+<h2>Surprise 🎉</h2>
+
+<p>
 Selamat ulang tahun yang ke-17 🎂<br><br>
 Semoga di usia baru ini hidupmu dipenuhi
 kebahagiaan, mimpi yang tercapai,
 dan banyak hari indah yang menunggumu.<br><br>
 Terima kasih sudah menjadi seseorang
 yang sangat berarti. 💙💗
-</div>
+</p>
 
-<div class="photo" id="photo">
 <img src="foto.jpg">
-</div>
 
 <audio id="music">
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
+</div>
 </div>
 
 <script>
@@ -209,12 +226,11 @@ setTimeout(typing,60);
 
 typing();
 
-/* surprise */
+/* popup surprise */
 
 function showSurprise(){
 
-document.getElementById("message").style.display="block";
-document.getElementById("photo").style.display="block";
+document.getElementById("modal").style.display="flex";
 
 document.getElementById("music").play();
 
@@ -222,7 +238,7 @@ createConfetti();
 
 }
 
-/* floating cute icons */
+/* floating icons */
 
 function createFloat(){
 
@@ -242,7 +258,7 @@ setTimeout(()=>{el.remove()},9000);
 
 }
 
-setInterval(createFloat,450);
+setInterval(createFloat,500);
 
 /* confetti */
 
