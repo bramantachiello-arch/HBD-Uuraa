@@ -1,6 +1,7 @@
 ```html
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 
 <meta charset="UTF-8">
@@ -9,6 +10,10 @@
 <title>Level 17 Unlocked</title>
 
 <style>
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
@@ -37,6 +42,7 @@ align-items:center;
 background:linear-gradient(135deg,#4aa3ff,#8ad0ff,#ff8fc7);
 background-size:200% 200%;
 animation:bgFlow 10s ease infinite;
+
 }
 
 @keyframes bgFlow{
@@ -51,7 +57,11 @@ background:rgba(255,255,255,0.15);
 padding:45px;
 border-radius:22px;
 backdrop-filter:blur(12px);
+
 box-shadow:0 20px 50px rgba(0,0,0,0.25);
+
+max-width:420px;
+width:90%;
 
 }
 
@@ -110,6 +120,8 @@ opacity:0;
 pointer-events:none;
 
 transition:1s;
+
+padding:20px;
 
 }
 
@@ -176,7 +188,7 @@ to{opacity:1}
 
 .photo{
 
-margin-top:18px;
+margin-top:20px;
 
 transform:translateY(-200px) rotate(-8deg) scale(0.6);
 opacity:0;
@@ -189,6 +201,8 @@ animation-delay:.7s;
 .photo img{
 
 width:160px;
+max-width:40vw;
+
 border-radius:14px;
 
 box-shadow:0 18px 35px rgba(0,0,0,0.45);
@@ -239,13 +253,33 @@ transform:translateY(110vh) rotate(720deg);
 
 /* RESPONSIVE */
 
-@media(max-width:480px){
+@media (max-width:600px){
 
-.age{font-size:80px;}
+.menu{
+padding:28px;
+}
 
-.menu{padding:30px;}
+.menu h1{
+font-size:24px;
+}
 
-.photo img{width:140px;}
+.message{
+font-size:15px;
+max-width:85vw;
+}
+
+.age{
+font-size:72px;
+}
+
+.photo img{
+width:130px;
+}
+
+button{
+padding:12px 26px;
+font-size:14px;
+}
 
 }
 
@@ -284,7 +318,7 @@ dan semua hal baik selalu menemukan jalan menuju hidupmu.
 </div>
 
 <div class="photo">
-<img src="uuraa.jpg">
+<img src="uuraa.jpg" alt="foto">
 </div>
 
 </div>
