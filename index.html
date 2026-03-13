@@ -1,0 +1,188 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Level 17 Unlocked</title>
+
+<style>
+
+body{
+margin:0;
+font-family: "Courier New", monospace;
+background:linear-gradient(135deg,#1b3c73,#ff6fa5);
+height:100vh;
+overflow:hidden;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+/* MENU GAME */
+
+.menu{
+position:absolute;
+}
+
+.pixel-title{
+font-size:48px;
+letter-spacing:3px;
+text-shadow:4px 4px #000;
+animation:blink 1.5s infinite;
+}
+
+.start-btn{
+margin-top:30px;
+padding:14px 30px;
+font-size:18px;
+border:3px solid white;
+background:transparent;
+color:white;
+cursor:pointer;
+transition:0.2s;
+}
+
+.start-btn:hover{
+background:white;
+color:#1b3c73;
+transform:scale(1.1);
+}
+
+@keyframes blink{
+0%{opacity:1;}
+50%{opacity:0.6;}
+100%{opacity:1;}
+}
+
+/* HALAMAN UCAPAN */
+
+.game-screen{
+display:none;
+background:rgba(255,255,255,0.08);
+padding:40px;
+border-radius:18px;
+backdrop-filter:blur(8px);
+width:420px;
+}
+
+.age{
+font-size:80px;
+color:#ffd1e6;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+button.open{
+margin-top:20px;
+padding:12px 26px;
+border:none;
+border-radius:30px;
+font-size:16px;
+background:#ffd1e6;
+color:#1b3c73;
+cursor:pointer;
+}
+
+.message{
+display:none;
+margin-top:20px;
+line-height:1.6;
+font-size:17px;
+}
+
+/* PIXEL STAR ANIMATION */
+
+.star{
+position:absolute;
+font-size:18px;
+animation:float 7s linear infinite;
+color:#ffe3f0;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-110vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="menu" id="menu">
+
+<div class="pixel-title">
+BIRTHDAY QUEST
+</div>
+
+<p>Press Start</p>
+
+<button class="start-btn" onclick="startGame()">START</button>
+
+</div>
+
+
+
+<div class="game-screen" id="game">
+
+<h2>Level Unlocked</h2>
+
+<div class="age">17</div>
+
+<p>Kamu baru saja membuka level baru.</p>
+
+<button class="open" onclick="openMessage()">Buka Pesan</button>
+
+<div class="message" id="msg">
+Selamat ulang tahun yang ke-17 🎂<br><br>
+Semoga di level baru kehidupanmu ini
+banyak kebahagiaan, mimpi yang tercapai,
+dan hari-hari indah yang kamu rasakan.<br><br>
+Terima kasih sudah menjadi seseorang
+yang begitu berarti. 💙💗
+</div>
+
+</div>
+
+
+<script>
+
+function startGame(){
+document.getElementById("menu").style.display="none";
+document.getElementById("game").style.display="block";
+}
+
+function openMessage(){
+document.getElementById("msg").style.display="block";
+}
+
+function createStar(){
+
+const star=document.createElement("div");
+star.className="star";
+star.innerHTML="✦";
+
+star.style.left=Math.random()*100+"vw";
+star.style.fontSize=(Math.random()*20+10)+"px";
+star.style.animationDuration=(Math.random()*4+4)+"s";
+
+document.body.appendChild(star);
+
+setTimeout(()=>{star.remove();},7000);
+
+}
+
+setInterval(createStar,400);
+
+</script>
+
+</body>
+</html>
+```
